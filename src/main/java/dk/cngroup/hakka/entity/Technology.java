@@ -22,6 +22,9 @@ public class Technology {
     @Relationship(type = "IS_A", direction = Relationship.OUTGOING)
     private Set<Technology> partsOf = new HashSet<>();
 
-    @Relationship(type = "INCLUDES", direction = Relationship.OUTGOING)
+    @Relationship(type = "RELATES", direction = Relationship.OUTGOING)
     private Set<Technology> includes = new HashSet<>();
+
+    @Relationship(type = "HAS_A", direction = Relationship.INCOMING)
+    private Set<Assignment> assignments = new HashSet<>();
 }

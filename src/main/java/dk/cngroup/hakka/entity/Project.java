@@ -16,12 +16,15 @@ public class Project {
     @GraphId
     private Long id;
 
+    private Long timurId;
+
     @Index(unique = true)
     private String name;
 
     @Relationship(type = "CONSISTS", direction = Relationship.OUTGOING)
     private Set<Project> subProjects = new HashSet<>();
 
-    @Relationship(type = "USES", direction = Relationship.OUTGOING)
-    private Set<Technology> technologies = new HashSet<>();
+    @Relationship(type = "HAS_A", direction = Relationship.INCOMING)
+    private Set<Assignment> assignments = new HashSet<>();
+
 }
