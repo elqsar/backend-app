@@ -54,8 +54,8 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get(Routes.PROJECTS))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Test Project"))
-                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$.projects[0].name").value("Test Project"))
+                .andExpect(jsonPath("$.projects[0].id").value(1))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(repository).findAll();
