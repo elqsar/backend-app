@@ -51,7 +51,7 @@ public class TimurIntegrationTest {
 
     @Test
     public void shouldGetAssignedPersons() {
-        stubFor(get(urlEqualTo("/projects/1/phases/2/activities/3/persons"))
+        stubFor(get(urlEqualTo("/projects/1/phases/2/activities/3/persons?minIntervalGap=14"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")

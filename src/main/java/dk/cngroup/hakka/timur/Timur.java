@@ -14,7 +14,7 @@ public interface Timur {
     @RequestMapping(method = GET, value = "projects")
     List<TimurProject> getProjects();
 
-    @RequestMapping(method = GET, value = "projects/{project}/phases/{phase}/activities/{activity}/persons")
+    @RequestMapping(method = GET, value = "projects/{project}/phases/{phase}/activities/{activity}/persons?minIntervalGap=14")
     List<TimurPerson> getAssignedPersons(
             @PathVariable("project") Long projectId,
             @PathVariable("phase") Long phaseId,
