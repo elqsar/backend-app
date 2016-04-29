@@ -1,10 +1,13 @@
 package dk.cngroup.hakka.controller.responses;
 
-import lombok.Data;
+import com.google.common.collect.Maps;
 
 import java.util.Map;
 
-@Data
-public class HakkaResponse<T> {
-    private final Map<String, T> response;
+public class HakkaResponse {
+    public static <T> Map<String, T> of(String name, T content) {
+        Map<String, T> result = Maps.newHashMap();
+        result.put(name, content);
+        return result;
+    }
 }
