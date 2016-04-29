@@ -4,6 +4,7 @@ import static dk.cngroup.hakka.timur.ProjectImport.*;
 
 import dk.cngroup.hakka.entity.Person;
 import dk.cngroup.hakka.entity.Project;
+import dk.cngroup.hakka.repository.PersonRepository;
 import dk.cngroup.hakka.repository.ProjectRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -31,11 +32,14 @@ public class ImportProjectTest {
     @Mock
     private Timur timur;
 
-    @InjectMocks
-    private ProjectImport projectImport;
-
     @Mock
     private ProjectRepository projectRepository;
+
+    @Mock
+    private PersonRepository personRepository;
+
+    @InjectMocks
+    private ProjectImport projectImport;
 
     @Before
     public void setup() {
@@ -59,9 +63,8 @@ public class ImportProjectTest {
     }
 
     @Test
-    @Ignore
     public void shouldStoreProject() {
-        when(projectRepository.getByTimurId(1l)).thenReturn(null);
+        when(projectRepository.findOneByTimurId(1l)).thenReturn(null);
         Project project1 = new Project();
         project1.setId(1l);
         when(projectRepository.save(project1)).thenReturn(project1);
@@ -73,16 +76,40 @@ public class ImportProjectTest {
     }
 
     @Test
-    @Ignore
-    public void shouldNoStoreExistingProject() {
+    public void shouldNotStoreExistingProject() {
         Project project1 = new Project();
-        project1.setId(1l);
-        when(projectRepository.getByTimurId(1l)).thenReturn(project1);
+        project1.setTimurId(1l);
+        when(projectRepository.findOneByTimurId(1l)).thenReturn(project1);
 
         Project project = projectImport.storeProject(1l, "Project X");
 
         assertNotNull(project);
         assertEquals(new Long(1), project.getTimurId());
+    }
+
+    @Test
+    public void shouldStorePerson() {
+        when(personRepository.findOneByTimurId(1l)).thenReturn(null);
+        Person person1 = new Person();
+        person1.setId(1l);
+        when(personRepository.save(person1)).thenReturn(person1);
+
+        Person person = projectImport.storePerson(1l, "Person X");
+
+        assertNotNull(person);
+        assertEquals(new Long(1), person.getTimurId());
+    }
+
+    @Test
+    public void shouldNotStoreExistingPerson() {
+        Person person1 = new Person();
+        person1.setTimurId(1l);
+        when(personRepository.findOneByTimurId(1l)).thenReturn(person1);
+
+        Person person = projectImport.storePerson(1l, "Person X");
+
+        assertNotNull(person);
+        assertEquals(new Long(1), person.getTimurId());
     }
 
 }

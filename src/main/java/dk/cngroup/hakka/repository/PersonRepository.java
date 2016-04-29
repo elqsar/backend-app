@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonRepository extends GraphRepository<Person> {
+
+    Person findOneByTimurId(long timurId);
 }

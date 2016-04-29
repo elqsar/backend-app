@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectRepository extends GraphRepository<Project> {
 
-    Project getByTimurId(long id);
+    Project findOneByTimurId(long id);
 }

@@ -100,16 +100,30 @@ public class ProjectImport {
     void storeProjectAndAssignments(long timurId, String name, List<TimurPerson> timurPersons) {
         Project project = storeProject(timurId, name);
         for(TimurPerson timurPerson: timurPersons) {
-            Person person = storePerson(timurPerson);
+            Person person = storePerson(timurPerson.getId(), timurPerson.getName());
         }
     }
 
     Project storeProject(long timurId, String name) {
-        return null;
+        Project project = projectRepository.findOneByTimurId(timurId);
+        if (project == null) {
+            project = new Project();
+            project.setTimurId(timurId);
+            project.setName(name);
+            projectRepository.save(project);
+        }
+        return project;
     }
 
-    Person storePerson(TimurPerson timurPerson) {
-        return null;
+    Person storePerson(long timurId, String name) {
+        Person person = personRepository.findOneByTimurId(timurId);
+        if (person == null) {
+            person = new Person();
+            person.setTimurId(timurId);
+            person.setName(name);
+            personRepository.save(person);
+        }
+        return person;
     }
 
     void storeProjectAndAssignments(Project project, Person person, List<TimurAssignment> timurAssignments) {
