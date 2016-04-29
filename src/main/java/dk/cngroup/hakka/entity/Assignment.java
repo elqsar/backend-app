@@ -17,7 +17,7 @@ public class Assignment {
     private Project project;
     private Technology technology;
 
-    private Date from;
-    private Date to;
+//    private Date from;
+//    private Date to;
 
 }
