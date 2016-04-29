@@ -4,7 +4,7 @@ import lombok.Data;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @NodeEntity
 @Data
@@ -17,7 +17,7 @@ public class Assignment {
     private Project project;
     private Technology technology;
 
-//    private Date from;
-//    private Date to;
+    private LocalDate from;
+    private LocalDate to;
 
 }

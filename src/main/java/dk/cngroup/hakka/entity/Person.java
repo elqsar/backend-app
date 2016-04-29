@@ -9,18 +9,20 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.HashSet;
 import java.util.Set;
 
-@NodeEntity
+@NodeEntity(label = "Person")
 @Data
 public class Person {
 
     @GraphId
     private Long id;
 
+    private Long timurId;
+
     @Index(unique = true)
     private String name;
 
-    @Relationship(type = "ALLOCATED", direction = Relationship.UNDIRECTED)
-    private Set<Project> projects = new HashSet<>();
+    @Relationship(type = "HAS_A", direction = Relationship.INCOMING)
+    private Set<Assignment> assignments = new HashSet<>();
 
     @Relationship(type = "USES", direction = Relationship.OUTGOING)
     private Set<Technology> technologies = new HashSet<>();
