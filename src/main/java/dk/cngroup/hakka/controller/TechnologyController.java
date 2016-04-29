@@ -1,11 +1,13 @@
 package dk.cngroup.hakka.controller;
 
+import dk.cngroup.hakka.controller.responses.HakkaResponse;
 import dk.cngroup.hakka.controller.routes.Routes;
 import dk.cngroup.hakka.entity.Technology;
 import dk.cngroup.hakka.repository.TechnologyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +18,9 @@ public class TechnologyController {
     private final TechnologyRepository technologyRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Technology> list() {
-        return technologyRepository.findAll();
+    public ResponseEntity list() {
+        Iterable<Technology> technologies = technologyRepository.findAll();
+        return ResponseEntity.ok(HakkaResponse.of("technologies", technologies));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

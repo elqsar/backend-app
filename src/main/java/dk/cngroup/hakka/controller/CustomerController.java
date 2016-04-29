@@ -1,11 +1,13 @@
 package dk.cngroup.hakka.controller;
 
+import dk.cngroup.hakka.controller.responses.HakkaResponse;
 import dk.cngroup.hakka.controller.routes.Routes;
 import dk.cngroup.hakka.entity.Customer;
 import dk.cngroup.hakka.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +18,9 @@ public class CustomerController {
     private final CustomerRepository customerRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Customer> list() {
-        return customerRepository.findAll();
+    public ResponseEntity list() {
+        Iterable<Customer> customers = customerRepository.findAll();
+        return ResponseEntity.ok(HakkaResponse.of("customers", customers));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
