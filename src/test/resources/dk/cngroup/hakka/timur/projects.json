@@ -1,0 +1,36 @@
+[
+  {
+    "name" : "Nomad Bodyshop",
+    "id" : 123,
+    "phases" : [
+      {
+        "name" : "Outsourcing",
+        "id" : 234,
+        "activities" : [
+          {
+            "name": "Amtrack",
+            "id" : 1091
+          },
+          {
+            "name": "UMC",
+            "id": 1092
+          }
+        ]
+      },
+      {
+        "name": "Overhead (not invoiced)",
+        "id" : 345,
+        "activities" : [
+          {
+            "name": "Overhead",
+            "id" : 1095
+          },
+          {
+            "name": "Training",
+            "id": 1096
+          }
+        ]
+      }
+    ]
+  }
+]
