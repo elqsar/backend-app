@@ -2,6 +2,7 @@ package dk.cngroup.hakka.controller;
 
 import dk.cngroup.hakka.controller.routes.Routes;
 import dk.cngroup.hakka.entity.Project;
+import dk.cngroup.hakka.timur.ProjectImport;
 import dk.cngroup.hakka.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProjectController {
 
     private final ProjectRepository projectRepository;
+    private final ProjectImport projectImport;
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Project> list() {
@@ -34,4 +36,10 @@ public class ProjectController {
     public void delete(@PathVariable("id") Long id) {
         projectRepository.delete(id);
     }
+
+    @RequestMapping(value = "/import", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ProjectImport.ImportResponse importProjects(@RequestBody ProjectImport.ImportRequest request) {
+        return projectImport.doImportProject(request);
+    }
+
 }
