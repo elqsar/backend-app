@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class TimurPerson {
-    private Long id;
+    private long id;
     private String name;
     private List<TimurAssignment> assignments;
 }

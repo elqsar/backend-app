@@ -36,7 +36,7 @@ public class ProjectControllerTest {
     @Before
     public void setUp() {
         repository = mock(ProjectRepository.class);
-        controller = new ProjectController(repository);
+        controller = new ProjectController(repository, null);
         mockMvc = standaloneSetup(controller).build();
     }
 
